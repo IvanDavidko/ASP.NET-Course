@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PhotoManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateCreated" Type="datetimeoffset" Precision="7" />
+    <Property Name="DateModified" Type="datetimeoffset" Precision="7" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AlbumPhoto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AlbumId" Type="int" Nullable="false" />
+    <Property Name="PhotoId" Type="int" Nullable="false" />
+    <Property Name="IsTitlePhoto" Type="bit" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="image" Nullable="false" />
+    <Property Name="ImageSize" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ImageType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateCreated" Type="datetimeoffset" Precision="7" />
+    <Property Name="PlaceCreated" Type="nvarchar" MaxLength="50" />
+    <Property Name="CameraModel" Type="nvarchar" MaxLength="50" />
+    <Property Name="FocalLengthOfTheLens" Type="nvarchar" MaxLength="50" />
+    <Property Name="Diaphragm" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShutterSpeed" Type="nvarchar" MaxLength="50" />
+    <Property Name="ISO" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlashInUse" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Album_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Album" Type="Self.Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AlbumPhoto_Album">
+    <End Role="Album" Type="Self.Album" Multiplicity="1" />
+    <End Role="AlbumPhoto" Type="Self.AlbumPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AlbumPhoto">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AlbumPhoto_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="AlbumPhoto" Type="Self.AlbumPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AlbumPhoto">
+        <PropertyRef Name="PhotoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Photo_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PhotoManagerModelStoreContainer">
+    <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlbumPhoto" EntityType="Self.AlbumPhoto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Album_User" Association="Self.FK_Album_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Album" EntitySet="Album" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AlbumPhoto_Album" Association="Self.FK_AlbumPhoto_Album">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="AlbumPhoto" EntitySet="AlbumPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AlbumPhoto_Photo" Association="Self.FK_AlbumPhoto_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="AlbumPhoto" EntitySet="AlbumPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Photo_User" Association="Self.FK_Photo_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Photo" EntitySet="Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

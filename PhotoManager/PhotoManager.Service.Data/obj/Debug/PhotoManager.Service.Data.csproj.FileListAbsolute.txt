@@ -1,0 +1,9 @@
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\PhotoManager.Service.Data.dll.config
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\PhotoManager.Service.Data.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\PhotoManager.Service.Data.pdb
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\EntityFramework.xml
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\obj\Debug\PhotoManager.Service.Data.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\obj\Debug\PhotoManager.Service.Data.pdb
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\EntityFramework.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Data\bin\Debug\EntityFramework.SqlServer.dll

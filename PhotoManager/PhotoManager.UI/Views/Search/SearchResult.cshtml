@@ -1,0 +1,16 @@
+﻿@model List<int>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="title">
+    @if (Model != null && Model.Any())
+    {
+        <div id="PhotoListBlock">
+            @foreach (var id in Model)
+            {
+                <div id="@id" class="list photo-item">
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,4 @@
+D:\Work\2013\Web\PhotoManager\PhotoManager.UnitTests\bin\Debug\PhotoManager.UnitTests.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.UnitTests\bin\Debug\PhotoManager.UnitTests.pdb
+D:\Work\2013\Web\PhotoManager\PhotoManager.UnitTests\obj\Debug\PhotoManager.UnitTests.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.UnitTests\obj\Debug\PhotoManager.UnitTests.pdb

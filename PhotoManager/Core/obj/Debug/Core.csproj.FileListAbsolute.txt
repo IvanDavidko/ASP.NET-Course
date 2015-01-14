@@ -1,0 +1,7 @@
+D:\Work\2013\Web\PhotoManager\Core\bin\Debug\AutoMapper.Net4.dll
+D:\Work\2013\Web\PhotoManager\Core\bin\Debug\Core.dll
+D:\Work\2013\Web\PhotoManager\Core\bin\Debug\Core.pdb
+D:\Work\2013\Web\PhotoManager\Core\bin\Debug\AutoMapper.dll
+D:\Work\2013\Web\PhotoManager\Core\bin\Debug\AutoMapper.xml
+D:\Work\2013\Web\PhotoManager\Core\obj\Debug\Core.dll
+D:\Work\2013\Web\PhotoManager\Core\obj\Debug\Core.pdb

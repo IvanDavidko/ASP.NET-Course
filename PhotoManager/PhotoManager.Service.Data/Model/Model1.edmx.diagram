@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8802b3c87af948699e80b91cdd84f2b2" Name="Diagram1">
+        <EntityTypeShape EntityType="PhotoManagerModel.Album" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoManagerModel.AlbumPhoto" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoManagerModel.Photo" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoManagerModel.Role" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhotoManagerModel.User" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="PhotoManagerModel.FK_Album_User" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoManagerModel.FK_AlbumPhoto_Album" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoManagerModel.FK_AlbumPhoto_Photo" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoManagerModel.FK_Photo_User" ManuallyRouted="false" />
+        <AssociationConnector Association="PhotoManagerModel.FK_User_Role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PhotoManagerModel.ELMAH_Error" Width="1.5" PointX="0.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

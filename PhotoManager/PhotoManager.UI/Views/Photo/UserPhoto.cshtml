@@ -1,0 +1,24 @@
+﻿@model Domain.Models.Photo
+<div>
+    <img class="img-responsive image-medium" src="@String.Format("data:{0};base64,{1}", Model.ImageType, Convert.ToBase64String(Model.Image))" alt="title image" />
+</div>
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="/Photo/Update/@Model.Id" class="btn btn-primary">EDIT</a>
+        </div>
+        <div class="col-sm-2">
+            <a id="@Model.Id" class="btn btn-primary" onclick="RemovePhoto(this)">REMOVE</a>
+        </div>
+        @if (ViewBag.MakeAlbumTitleAvailable != null && Convert.ToBoolean(ViewBag.MakeAlbumTitleAvailable))
+        {
+            <div class="col-sm-4">
+                <a id="@Model.Id" class="btn btn-primary" onclick="MakePhotoTitle(this)">MAKE ALBUM TITLE</a>
+            </div>
+            <div class="col-sm-4">
+                <a id="@Model.Id" class="btn btn-primary" onclick=" DeletePhotoFromAlbum(this)">DELETE FROM ALBUM</a>
+            </div>
+        }
+    </div>
+}

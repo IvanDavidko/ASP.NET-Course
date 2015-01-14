@@ -1,0 +1,43 @@
+﻿html, body { height: 100%; }
+#wrap { min-height: 100%; background-color: #a1a1a1; }
+#main { overflow: auto; padding-bottom: 150px; /* must be same height as the footer */ }
+#footer { position: relative; margin-top: -150px; /* negative value of footer height */ height: 150px; clear: both; }
+
+/* Opera Fix */
+body:before { content: ""; height: 100%; float: left; width: 0; margin-top: -32767px; }
+
+.navbar-default { background-color: #a1a1a1 !important; }
+.navbar { border-bottom: 3px solid black !important; }
+.title { margin-top: 30px; }
+.clear-both { clear: both; }
+
+img { min-width: 150px; max-width: 300px; }
+.list img { min-width: 150px; max-width: 300px; }
+.list { margin: 20px; padding: 20px; float: left; }
+.list-item { float: left; margin: 10px; background-color: white; }
+    .list-item img { min-width: 150px; max-width: 300px; padding: 10px; }
+/*.list img{max-width: 50px;}*/
+.chosen { background-color: #e0dcdc; }
+.greylink { color: white !important; background-color: #808080 !important; }
+#ListBlock .col-sm-2 { margin-right: 15px; }
+
+.img-responsive { margin: 0 auto; }
+.image-small { min-width: 150px; max-width: 300px !important; }
+.image-medium { min-width: 150px; max-width: 500px !important; }
+.image-large { width: auto; }
+
+.fancybox-inner { background-color: #e0dcdc; }
+/*#PhotoContainer{position:fixed;z-index:100;background-color:#e0dcdc;}*/
+.fancy-title { background-color: white; border-bottom: 1px solid black; }
+    .fancy-title .close { background: url('../Content/Images/close-button.png'); width: 21px; height: 21px; opacity: 1; margin: 0 -15px 0 0; }
+.fancybox-inner .selected, .fancybox-inner .list-item:focus, .fancybox-inner .list-item:hover { background-color: black; cursor: pointer; }
+#TitlePhotoContainer .row, #PhotoContainer .row { margin-left: 0; margin-right: 0; }
+
+.outer-block { z-index: 9999; position: fixed; left: 0; bottom: 0; width: 100%; height: 100%; }
+.inner-block { z-index: 10000; width: 60%; height: 600px; background-color: #e0dcdc; position: fixed; left: 20%; top: 200px; }
+/*.light-box{z-index:10000;width:60%;height:auto;background-color:#e0dcdc;position:fixed;left:20%;top:200px;}*/
+.selected, .list-item:focus, .list-item:hover { background-color: black; cursor: pointer; }
+.close { background: url('../Content/Images/close-button.png'); width: 21px; height: 21px; opacity: 1; margin: 0 -15px 0 0; }
+.scroll { width: 100%; height: 500px; overflow-y: scroll; }
+.error { color: red; font-size: 16px; }
+.form-horizontal .search-panel { margin-top: 30px; margin-left: 0; margin-right: 0; }

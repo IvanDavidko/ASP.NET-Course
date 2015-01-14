@@ -1,0 +1,44 @@
+﻿@model PhotoManager.UI.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 col-sm-offset-2 control-label" })
+        <div class="col-sm-3">
+            @Html.TextBoxFor(model => model.Name, new { @type = "text", @class = "form-control", @placeholder = "Name" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, new { @class = "col-sm-2 col-sm-offset-2 control-label" })
+        <div class="col-sm-3">
+            @Html.TextBoxFor(model => model.Password, "RegisterForm", new { @type = "password", @class = "form-control", @placeholder = "Password" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2 col-sm-offset-5">
+            <input class="form-control btn btn-primary" type="submit" value="Log in" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2 col-sm-offset-2"></div>
+        <div class="col-sm-3">
+            @Html.ActionLink("Register", "Register", "Account") if you don't have an account.
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

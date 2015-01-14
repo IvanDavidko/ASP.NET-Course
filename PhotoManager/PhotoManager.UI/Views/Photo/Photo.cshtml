@@ -1,0 +1,14 @@
+﻿@model Domain.Models.Photo
+
+@if (Model != null && Model.Image != null)
+{
+    <div class="image-medium">
+        <img class="img-responsive image-medium" src="@String.Format("data:{0};base64,{1}", Model.ImageType, Convert.ToBase64String(Model.Image))" alt="title image" />
+    </div>
+}
+else
+{
+    <div>
+        <img class="img-responsive" src="/Content/Images/default_image.jpg" alt="title image" />
+    </div>
+}

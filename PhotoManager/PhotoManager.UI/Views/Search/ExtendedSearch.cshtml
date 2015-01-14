@@ -1,0 +1,24 @@
+﻿@model ExtendedSearch
+
+@using Domain.Models
+
+@{
+    ViewBag.Title = "Extended Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+@using (Html.BeginForm("ExtendedSearch", "Search", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.Action("PhotoForm", "Photo")
+
+    <div class="form-group">
+        <div class="col-sm-2 col-sm-offset-3">
+            <input class="form-control btn btn-primary" type="submit" value="SEARCH" />
+        </div>
+    </div>
+}
+

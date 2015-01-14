@@ -1,0 +1,17 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <a href onclick="ChangeRole()">Premium role</a><span> | </span>
+    <a href="/account/logout">Log out</a>
+}
+else
+{
+
+    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "navbar-brand" })
+
+    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "navbar-brand" })
+}
+
+
+
+
+

@@ -1,0 +1,18 @@
+﻿@model String
+@using (Html.BeginForm("Search", "Search", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group search-panel">
+        <label class="col-sm-2 control-label">Search photo</label>
+        <div class="col-sm-3">
+            @Html.TextBox("SearchName", Model, new { @type = "text", @class = "form-control" })
+        </div>
+        <div class="col-sm-2">
+            <input class="form-control btn btn-primary" type="submit" value="SEARCH" />
+        </div>
+        <div class="col-sm-2">
+            <a class="form-control btn btn-primary" href="/search/extendedsearch" >EXTENDED SEARCH</a>
+        </div>
+    </div>
+}

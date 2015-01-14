@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PhotoManagerModelStoreContainer" CdmEntityContainer="PhotoManagerEntities">
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="PhotoManagerModel.Album">
+        <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AlbumPhotoes">
+      <EntityTypeMapping TypeName="PhotoManagerModel.AlbumPhoto">
+        <MappingFragment StoreEntitySet="AlbumPhoto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+          <ScalarProperty Name="IsTitlePhoto" ColumnName="IsTitlePhoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="PhotoManagerModel.Photo">
+        <MappingFragment StoreEntitySet="Photo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
+          <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="PlaceCreated" ColumnName="PlaceCreated" />
+          <ScalarProperty Name="CameraModel" ColumnName="CameraModel" />
+          <ScalarProperty Name="FocalLengthOfTheLens" ColumnName="FocalLengthOfTheLens" />
+          <ScalarProperty Name="Diaphragm" ColumnName="Diaphragm" />
+          <ScalarProperty Name="ShutterSpeed" ColumnName="ShutterSpeed" />
+          <ScalarProperty Name="ISO" ColumnName="ISO" />
+          <ScalarProperty Name="FlashInUse" ColumnName="FlashInUse" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="PhotoManagerModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="PhotoManagerModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

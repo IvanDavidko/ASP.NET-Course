@@ -1,0 +1,23 @@
+﻿@model int[]
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var albumId = String.Empty;
+    if (ViewBag.AlbumId != null)
+    {
+        albumId = ViewBag.AlbumId.ToString();
+    }
+}
+<div class="title">
+    @if (Model != null && Model.Any())
+    {
+        <div id="UserPhotoListBlock" @(!String.IsNullOrEmpty(albumId) ? String.Format("data-album-id={0}",albumId) : "")>
+            @foreach (var id in Model)
+            {
+                <div id="@id" class="list photo-item">
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@using Domain.Models
+@model Album[]
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="UserAlbumListBlock">
+    @if (ViewBag.Error != null)
+    {
+        <label class="error">@ViewBag.Error.ToString()</label>
+    }
+    @if (Model != null)
+    {
+        foreach (var album in Model)
+        {
+            <div id="@album.Id" class="album-item list text-center">
+                <div>
+                    <span>@Html.Raw(album.Title)</span>
+                </div>
+                <div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Raw(!String.IsNullOrEmpty(album.Description) ? String.Format("<span>{0}</span>", album.Description) : String.Format("<a href='/album/Update?albumId={0}'>Click here to add a description</a>", album.Id))
+                    }
+                    else
+                    {
+                        @Html.Raw(album.Description)
+                    }
+                </div>
+                <div>
+                    <span>Created date: @Html.Raw(album.DateCreated)</span>
+                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a class="btn btn-primary" href="/Album/Update?id=@album.Id">EDIT</a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a id="@album.Id" class="btn btn-primary" onclick="RemoveAlbum(this)">REMOVE</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-primary" href="/Photo/AddPhotosToAlbum?albumId=@album.Id">ADD PHOTO TO AlBUM</a>
+                        </div>
+                        <div class="col-sm-offset-2 col-md-2">
+                            <input type="button" class="btn btn-primary" value="Get Link" onclick="alert('@album.Url')" />
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,9 @@
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\bin\Debug\PhotoManager.Service.Contract.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\bin\Debug\PhotoManager.Service.Contract.pdb
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\obj\Debug\PhotoManager.Service.Contract.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\obj\Debug\PhotoManager.Service.Contract.pdb
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\obj\Debug\PhotoManager.Service.Contract.csprojResolveAssemblyReference.cache
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\bin\Debug\PhotoManager.Service.Data.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\bin\Debug\EntityFramework.dll
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\bin\Debug\PhotoManager.Service.Data.pdb
+D:\Work\2013\Web\PhotoManager\PhotoManager.Service.Contract\bin\Debug\EntityFramework.xml

@@ -1,0 +1,66 @@
+﻿@using Domain.Models
+@model Photo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div>
+        <img class="img-responsive image-large" src="@String.Format("data:{0};base64,{1}", Model.ImageType, Convert.ToBase64String(Model.Image))" alt="title image" />
+    </div>
+</div>
+
+<div class="row title">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Name</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.Name) ? Model.Name : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Description</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.Description) ? Model.Description : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Date Created</label>
+    <div class="col-sm-3">
+        <span>@(Model.DateCreated != null ? Model.DateCreated.ToString() : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Camera model</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.CameraModel) ? Model.CameraModel : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Descri focal length of the lensption</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.FocalLengthOfTheLens) ? Model.FocalLengthOfTheLens : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Diaphragm</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.Diaphragm) ? Model.Diaphragm : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Shutter Speed</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.ShutterSpeed) ? Model.ShutterSpeed : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">ISO</label>
+    <div class="col-sm-3">
+        <span>@(!String.IsNullOrEmpty(Model.ISO) ? Model.ISO : "-")</span>
+    </div>
+</div>
+<div class="row">
+    <label class="col-sm-2 col-sm-offset-3 control-label">Flash in use</label>
+    <div class="col-sm-3">
+        <span>@(Model.FlashInUse ? "Enable" : "Disable" ) </span>
+    </div>
+</div>

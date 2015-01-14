@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PhotoManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="DateCreated" Type="datetimeoffset" Precision="7" />
+          <Property Name="DateModified" Type="datetimeoffset" Precision="7" />
+          <Property Name="Url" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlbumPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="IsTitlePhoto" Type="bit" />
+        </EntityType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Application" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="Sequence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllXml" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+          <Property Name="ImageSize" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImageType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetimeoffset" Precision="7" />
+          <Property Name="PlaceCreated" Type="nvarchar" MaxLength="50" />
+          <Property Name="CameraModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="FocalLengthOfTheLens" Type="nvarchar" MaxLength="50" />
+          <Property Name="Diaphragm" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShutterSpeed" Type="nvarchar" MaxLength="50" />
+          <Property Name="ISO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FlashInUse" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Album_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlbumPhoto_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="AlbumPhoto" Type="Self.AlbumPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlbumPhoto">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlbumPhoto_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="AlbumPhoto" Type="Self.AlbumPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlbumPhoto">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SearchPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PhotoManagerModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumPhoto" EntityType="Self.AlbumPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Album_User" Association="Self.FK_Album_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlbumPhoto_Album" Association="Self.FK_AlbumPhoto_Album">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="AlbumPhoto" EntitySet="AlbumPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlbumPhoto_Photo" Association="Self.FK_AlbumPhoto_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="AlbumPhoto" EntitySet="AlbumPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_User" Association="Self.FK_Photo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PhotoManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTimeOffset" Precision="7" />
+          <Property Name="DateModified" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Album_User" FromRole="Album" ToRole="User" />
+          <NavigationProperty Name="AlbumPhotoes" Relationship="Self.FK_AlbumPhoto_Album" FromRole="Album" ToRole="AlbumPhoto" />
+        </EntityType>
+        <EntityType Name="AlbumPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+          <Property Name="IsTitlePhoto" Type="Boolean" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_AlbumPhoto_Album" FromRole="AlbumPhoto" ToRole="Album" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_AlbumPhoto_Photo" FromRole="AlbumPhoto" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ImageSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTimeOffset" Precision="7" />
+          <Property Name="PlaceCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CameraModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FocalLengthOfTheLens" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Diaphragm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShutterSpeed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FlashInUse" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AlbumPhotoes" Relationship="Self.FK_AlbumPhoto_Photo" FromRole="Photo" ToRole="AlbumPhoto" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Photo_User" FromRole="Photo" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Albums" Relationship="Self.FK_Album_User" FromRole="User" ToRole="Album" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_Photo_User" FromRole="User" ToRole="Photo" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Album_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlbumPhoto_Album">
+          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="AlbumPhoto" Type="Self.AlbumPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlbumPhoto">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlbumPhoto_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+          <End Role="AlbumPhoto" Type="Self.AlbumPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlbumPhoto">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PhotoManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="AlbumPhotoes" EntityType="Self.AlbumPhoto" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Album_User" Association="Self.FK_Album_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Album" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlbumPhoto_Album" Association="Self.FK_AlbumPhoto_Album">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="AlbumPhoto" EntitySet="AlbumPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlbumPhoto_Photo" Association="Self.FK_AlbumPhoto_Photo">
+            <End Role="Photo" EntitySet="Photos" />
+            <End Role="AlbumPhoto" EntitySet="AlbumPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_User" Association="Self.FK_Photo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="SearchPhoto" ReturnType="Collection(Int32)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ELMAH_Error" EntityType="PhotoManagerModel.ELMAH_Error" />
+        </EntityContainer>
+        <ComplexType Name="SearchImage_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Binary" Name="Image" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="ImageSize" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="DateTimeOffset" Name="DateCreated" Nullable="true" />
+          <Property Type="String" Name="PlaceCreated" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CameraModel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FocalLengthOfTheLens" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Diaphragm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ShutterSpeed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISO" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="FlashInUse" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SearchImageAsync_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Binary" Name="Image" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="ImageSize" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="DateTimeOffset" Name="DateCreated" Nullable="true" />
+          <Property Type="String" Name="PlaceCreated" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CameraModel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FocalLengthOfTheLens" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Diaphragm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ShutterSpeed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISO" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="FlashInUse" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SearchPhoto_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Binary" Name="Image" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="ImageSize" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ImageType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="DateTimeOffset" Name="DateCreated" Nullable="true" />
+          <Property Type="String" Name="PlaceCreated" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CameraModel" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FocalLengthOfTheLens" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Diaphragm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ShutterSpeed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISO" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="FlashInUse" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="Guid" Nullable="false" />
+          <Property Name="Application" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Host" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PhotoManagerModelStoreContainer" CdmEntityContainer="PhotoManagerEntities">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="PhotoManagerModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlbumPhotoes">
+            <EntityTypeMapping TypeName="PhotoManagerModel.AlbumPhoto">
+              <MappingFragment StoreEntitySet="AlbumPhoto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="IsTitlePhoto" ColumnName="IsTitlePhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="PhotoManagerModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
+                <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="PlaceCreated" ColumnName="PlaceCreated" />
+                <ScalarProperty Name="CameraModel" ColumnName="CameraModel" />
+                <ScalarProperty Name="FocalLengthOfTheLens" ColumnName="FocalLengthOfTheLens" />
+                <ScalarProperty Name="Diaphragm" ColumnName="Diaphragm" />
+                <ScalarProperty Name="ShutterSpeed" ColumnName="ShutterSpeed" />
+                <ScalarProperty Name="ISO" ColumnName="ISO" />
+                <ScalarProperty Name="FlashInUse" ColumnName="FlashInUse" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PhotoManagerModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PhotoManagerModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchPhoto" FunctionName="PhotoManagerModel.Store.SearchPhoto" />
+          <EntitySetMapping Name="ELMAH_Error">
+            <EntityTypeMapping TypeName="PhotoManagerModel.ELMAH_Error">
+              <MappingFragment StoreEntitySet="ELMAH_Error">
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
